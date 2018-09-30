@@ -21,26 +21,10 @@ module.exports = {
 		'no-use-before-define': ['error', { functions: false, variables: false }],
 		quotes: ['error', 'single'],
 		semi: ['error', 'always'],
-		'react/jsx-filename-extension': [
-			1,
-			{
-				extensions: ['.js', '.jsx'],
-			},
-		],
 		'react/jsx-indent': [2, 'tab'],
-		'react/prefer-stateless-function': [
-			1,
-			{
-				ignorePureComponents: true,
-			},
-		],
-		'import/extensions': [
-			1,
-			'never',
-			{
-				svg: 'always',
-			},
-		],
+		'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+		'react/prefer-stateless-function': [1, { ignorePureComponents: true }],
+		'import/extensions': [1, 'never', { svg: 'always' }],
 		'import/no-extraneous-dependencies': [
 			'error',
 			{
