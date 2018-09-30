@@ -5,6 +5,7 @@ module.exports = {
 		jest: true,
 	},
 	extends: 'airbnb',
+	parser: 'babel-eslint',
 	parserOptions: {
 		ecmaFeatures: {
 			experimentalObjectRestSpread: true,
@@ -14,8 +15,10 @@ module.exports = {
 	},
 	plugins: ['react', 'flowtype', 'jsx-a11y', 'import'],
 	rules: {
+		'no-tabs': 0,
 		indent: ['error', 'tab'],
 		'linebreak-style': ['error', 'unix'],
+		'no-use-before-define': ['error', { functions: false, variables: false }],
 		quotes: ['error', 'single'],
 		semi: ['error', 'always'],
 		'react/jsx-filename-extension': [
@@ -24,8 +27,9 @@ module.exports = {
 				extensions: ['.js', '.jsx'],
 			},
 		],
+		'react/jsx-indent': [2, 'tab'],
 		'react/prefer-stateless-function': [
-			2,
+			1,
 			{
 				ignorePureComponents: true,
 			},
