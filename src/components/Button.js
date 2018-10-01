@@ -1,8 +1,17 @@
+/**
+ * @format
+ * @flow
+ */
 import React from 'react';
 import { Text, TouchableOpacity } from 'react-native';
 
-const Button = ({ text }) => (
-	<TouchableOpacity style={styles.button}>
+type Props = {
+	text: string,
+	onPress: Function,
+};
+
+const Button = ({ text, onPress }: Props) => (
+	<TouchableOpacity onPress={onPress} style={styles.button}>
 		<Text style={styles.buttonText}>{text}</Text>
 	</TouchableOpacity>
 );

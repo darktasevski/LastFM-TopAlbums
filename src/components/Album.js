@@ -3,13 +3,21 @@
  * @flow
  */
 import React from 'react';
-import { Text, View, Image } from 'react-native';
+import {
+	Text, View, Image, Linking,
+} from 'react-native';
 
 import Card from './Card';
 import CardSection from './CardSection';
 import Button from './Button';
 
-const Album = ({ album }) => (
+import type { Album } from '../types';
+
+type Props = {
+	album: Album,
+};
+
+export default ({ album }: Props) => (
 	<Card>
 		<CardSection>
 			<View style={styles.thumbnailContainer}>
@@ -27,7 +35,7 @@ const Album = ({ album }) => (
 			<Image style={styles.albumImage} source={{ uri: album.image[2]['#text'] }} resizeMode="contain" />
 		</CardSection>
 		<CardSection>
-			<Button text="Details" />
+			<Button onPress={() => Linking.openURL(album.url)} text="Details" />
 		</CardSection>
 	</Card>
 );
@@ -63,5 +71,3 @@ const styles = {
 		width: null,
 	},
 };
-
-export default Album;

@@ -6,10 +6,10 @@ import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 
 import Album from './Album';
+import type { Album as AlbumType } from '../types';
 
-type Content = { url?: string, name?: string };
-type Props = { albums: Array<Content> };
-type State = { albums: Array<Content> };
+type Props = { albums: Array<AlbumType> };
+type State = { albums: Array<AlbumType> };
 
 class AlbumList extends Component<Props, State> {
 	state = {

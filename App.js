@@ -10,9 +10,15 @@ import keys from './env';
 import Header from './src/components/Header';
 import AlbumList from './src/components/AlbumList';
 
-type Props = {};
+import type { Album } from './src/types';
 
-export default class App extends Component<Props> {
+type State = { albums?: Array<Album> };
+
+export default class App extends Component<State> {
+	static defaultProps = {
+		albums: [],
+	};
+
 	state = {
 		albums: [],
 	};
@@ -22,12 +28,6 @@ export default class App extends Component<Props> {
 			`http://ws.audioscrobbler.com/2.0/?method=tag.gettopalbums&tag=disco&api_key=${keys.lastFMKey}&format=json`,
 		);
 		this.setState({ albums: data.albums.album });
-		console.log(data);
-	}
-
-	static getDerivedStateFromProps(a, b) {
-		console.log(a, b);
-		return null;
 	}
 
 	render() {
@@ -43,8 +43,6 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		// justifyContent: 'center',
-		// alignItems: 'center',
 		backgroundColor: '#F5FCFF',
 	},
 });
