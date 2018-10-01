@@ -3,20 +3,65 @@
  * @flow
  */
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Image } from 'react-native';
 
 import Card from './Card';
 import CardSection from './CardSection';
+import Button from './Button';
 
 const Album = ({ album }) => (
 	<Card>
 		<CardSection>
-			<View>
-				<Text>{album.artist.name}</Text>
-				<Text>{album.name}</Text>
+			<View style={styles.thumbnailContainer}>
+				<Image
+					style={styles.thumbnail}
+					source={{ uri: 'https://www.shareicon.net/data/256x256/2015/08/31/93745_logo_512x512.png' }}
+				/>
 			</View>
+			<View style={styles.header}>
+				<Text style={styles.headerText}>{album.name}</Text>
+				<Text style={styles.headerAuthor}>{album.artist.name}</Text>
+			</View>
+		</CardSection>
+		<CardSection>
+			<Image style={styles.albumImage} source={{ uri: album.image[2]['#text'] }} resizeMode="contain" />
+		</CardSection>
+		<CardSection>
+			<Button text="Details" />
 		</CardSection>
 	</Card>
 );
+
+const styles = {
+	header: {
+		// hack to allow text to break if the album name is to long
+		width: 0,
+		flexGrow: 1,
+
+		justifyContent: 'space-around',
+	},
+	headerText: {
+		fontSize: 17,
+		fontWeight: 'bold',
+	},
+	headerAuthor: {
+		color: '#777',
+	},
+	thumbnail: {
+		width: 40,
+		height: 40,
+	},
+	thumbnailContainer: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginRight: 10,
+	},
+	albumImage: {
+		height: 350,
+		// hack to make sure that the image take full width
+		flex: 1,
+		width: null,
+	},
+};
 
 export default Album;
