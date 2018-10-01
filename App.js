@@ -2,29 +2,39 @@
  * @format
  * @flow
  */
-
 import React, { Component } from 'react';
-import {
-	Platform, StyleSheet, Text, View,
-} from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import axios from 'axios';
 
+import keys from './env';
 import Header from './src/components/Header';
-
-const instructions = Platform.select({
-	ios: 'Press Cmd+R to RLD,\n Cmd+D or shake for dev menu',
-	android: 'Double tap R on your keyboard to reload,\n Shake or press menu button for dev menu',
-});
+import AlbumList from './src/components/AlbumList';
 
 type Props = {};
-/* eslint-disable react/prefer-stateless-function */
+
 export default class App extends Component<Props> {
+	state = {
+		albums: [],
+	};
+
+	async componentDidMount() {
+		const { data } = await axios.get(
+			`http://ws.audioscrobbler.com/2.0/?method=tag.gettopalbums&tag=disco&api_key=${keys.lastFMKey}&format=json`,
+		);
+		this.setState({ albums: data.albums.album });
+		console.log(data);
+	}
+
+	static getDerivedStateFromProps(a, b) {
+		console.log(a, b);
+		return null;
+	}
+
 	render() {
 		return (
 			<View style={styles.container}>
-				<Header />
-				<Text style={styles.welcome}>Welcome to React Native!</Text>
-				<Text style={styles.instructions}>To get started, edit App.js</Text>
-				<Text style={styles.instructions}>{instructions}</Text>
+				<Header text="Albums" />
+				<AlbumList albums={this.state.albums} />
 			</View>
 		);
 	}
@@ -33,18 +43,8 @@ export default class App extends Component<Props> {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
+		// justifyContent: 'center',
+		// alignItems: 'center',
 		backgroundColor: '#F5FCFF',
-	},
-	welcome: {
-		fontSize: 20,
-		textAlign: 'center',
-		margin: 10,
-	},
-	instructions: {
-		textAlign: 'center',
-		color: '#333333',
-		marginBottom: 5,
 	},
 });
